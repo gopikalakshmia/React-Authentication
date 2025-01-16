@@ -27,6 +27,10 @@ const mode=queryParams.get('mode')||'login';
   if (!response.ok){
     throw json({message:'some error while post data in authentication'});
   }
+const responseData=await response.json();
+const token=responseData.token;
+localStorage.setItem('token',token);
+
 return redirect('/');
 
 }
