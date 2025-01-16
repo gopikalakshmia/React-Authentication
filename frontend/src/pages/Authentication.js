@@ -10,9 +10,10 @@ export default AuthenticationPage;
 
 export const authenticationAction=async({request,params})=>{
 
+  //query params
 const queryParams=new URL(request.url).searchParams;
-
 const mode=queryParams.get('mode')||'login';
+
 
   const data=await request.formData();
   const formDta={email:data.get('email'),password:data.get('password')};
@@ -27,6 +28,8 @@ const mode=queryParams.get('mode')||'login';
   if (!response.ok){
     throw json({message:'some error while post data in authentication'});
   }
+
+  //token extraction
 const responseData=await response.json();
 const token=responseData.token;
 localStorage.setItem('token',token);
